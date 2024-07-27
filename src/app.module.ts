@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './service/prisma.service';
 import { UserController } from './controller/user.controller';
+import { LoginService } from './service/login.service';
 
 @Module({
   imports: [],
@@ -12,6 +13,7 @@ import { UserController } from './controller/user.controller';
   ],
   providers: [
     AppService,
+    LoginService,
     PrismaService
   ],
 })
