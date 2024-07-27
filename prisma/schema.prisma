@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model project {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  detail String
+  id_    Int    @map("id")
+  title  String
+}
+
+model role {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  id_  Int    @map("id")
+  name String
+}
+
+model task {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  actual_time   Int
+  code          String
+  create_date   String
+  create_user   String  @db.ObjectId
+  end_date      String
+  id_           Int     @map("id")
+  schedule_time Int
+  start_date    String
+  status        Boolean
+  title         String
+  type_id       String
+  update_date   String
+  update_user   String  @db.ObjectId
+}
+
+model type_task {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  id_  Int    @map("id")
+  name String
+}
+
+model user {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  address   String
+  birthday  String
+  id_       Int     @map("id")
+  is_manage Boolean
+  password  String
+  role_id   String  @db.ObjectId
+  username  String
+}
+
+model user_join_project {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
