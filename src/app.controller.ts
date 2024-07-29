@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
-import { LoginService } from './service/login.service';
+import { LoginService } from './service/user.service';
 import { UserChangePassword, UserLogin } from './model/user.model';
 
 @Controller()

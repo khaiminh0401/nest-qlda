@@ -1,10 +1,10 @@
-import { HttpException, Injectable, OnModuleInit } from '@nestjs/common';
+import { HttpException, Injectable, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from './prisma.service';
-import { UserChangePassword, UserLogin } from 'src/model/user.model';
+import { UserChangePassword, UserLogin, UserModel } from 'src/model/user.model';
 
 @Injectable()
-export class LoginService implements OnModuleInit {
+export class UserService implements OnModuleInit {
   constructor(private prismaSerivce: PrismaService) {}
   onModuleInit() {}
 
@@ -19,17 +19,16 @@ export class LoginService implements OnModuleInit {
     return isMatch;
   }
 
-  async checkLogin(dataRequest: UserLogin): Promise<boolean> {
+  async checkLogin(dataRequest: UserLogin): Promise<{isValid: Promise<boolean>, result: UserModel}> {
     const user = await this.prismaSerivce.user.findFirst({
       where: {
         username: dataRequest.username,
-      },
-      select: {
-        username: true,
-        password: true,
-      },
+      }
     });
-    return this.comparePassword(dataRequest.password, user.password);
+    return {
+      isValid: this.comparePassword(dataRequest.password, user.password),
+      result: user 
+    }
   }
 
   async changePassword(dataRequest: UserChangePassword): Promise<void> {
