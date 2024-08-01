@@ -1,13 +1,13 @@
 import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
-import { LoginService } from './service/user.service';
+import { UserService } from './service/user.service';
 import { UserChangePassword, UserLogin } from './model/user.model';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private loginService: LoginService
+    private loginService: UserService
   ) {}
 
   @Get()

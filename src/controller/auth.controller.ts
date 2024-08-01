@@ -8,7 +8,7 @@ import {
     Request,
     UseGuards
   } from '@nestjs/common';
-import { AuthGuard } from 'src/guard/auth.guard';
+import { AuthGuard, Public } from 'src/guard/auth.guard';
 import { AuthService } from 'src/service/auth.service';
 
 @Controller('auth')
@@ -16,6 +16,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @HttpCode(HttpStatus.OK)
+    @Public()
     @Post('login')
     signIn(@Body() signInDto: Record<string, any>) {
       return this.authService.signIn(signInDto.username, signInDto.password);
