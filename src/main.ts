@@ -11,6 +11,9 @@ async function bootstrap() {
     methods: ["GET", "POST"],
     credentials: true,
   })
+  app.setGlobalPrefix("api", {
+    exclude: ["auth"]
+  });
   app.useGlobalInterceptors(new TransformInterceptor());
   await app.listen(3000);
 }
