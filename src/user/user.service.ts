@@ -25,6 +25,9 @@ export class UserService implements OnModuleInit {
         username: dataRequest.username,
       }
     });
+    if(!user){
+      throw new HttpException("error", 500);
+    }
     return {
       isValid: this.comparePassword(dataRequest.password, user.password),
       result: user 
