@@ -25,7 +25,6 @@ export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
         context.getClass(),
       ]);
       if (isPublic) {
-        // 💡 See this condition
         return true;
       }
       const request = context.switchToHttp().getRequest();
@@ -40,8 +39,6 @@ export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
             secret: jwtConstants.secret
           }
         );
-        // 💡 We're assigning the payload to the request object here
-        // so that we can access it in our route handlers
         request['user'] = payload;
       } catch {
         throw new UnauthorizedException();
