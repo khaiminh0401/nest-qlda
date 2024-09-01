@@ -28,6 +28,7 @@ export class AuthService {
       const payload = { sub: data.result.id, username: data.result.username };
       return {
         access_token: await this.jwtService.signAsync(payload),
+        username: data.result.username
       };
     } catch (error) {
       throw new HttpException('error', 500);
