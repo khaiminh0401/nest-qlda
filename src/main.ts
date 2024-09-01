@@ -12,7 +12,7 @@ async function bootstrap() {
     credentials: true,
   })
   app.setGlobalPrefix("api", {
-    exclude: ["auth"]
+    exclude: ["auth/login"]
   });
   app.useGlobalInterceptors(new TransformInterceptor());
   await app.listen(3000);

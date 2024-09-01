@@ -19,6 +19,12 @@ export class UserController {
       where: {
         username: username,
       },
+      select: {
+        id: true,
+        role_id: true,
+        birthday: true,
+        username: true,
+      },
     });
   }
 }
