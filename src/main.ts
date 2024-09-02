@@ -8,6 +8,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:4200',
     ],
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
     methods: ["GET", "POST"],
     credentials: true,
   })
