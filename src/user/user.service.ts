@@ -1,10 +1,12 @@
-import { HttpException, Injectable, OnModuleInit, UnauthorizedException } from '@nestjs/common';
+import { HttpException, Injectable, Logger, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../service/prisma.service';
 import { UserChangePassword, UserLogin, UserModel } from 'src/model/user.model';
 
 @Injectable()
 export class UserService implements OnModuleInit {
+  private readonly logger = new Logger(UserService.name);
+
   constructor(private prismaSerivce: PrismaService) {}
   onModuleInit() {}
 
@@ -38,6 +40,7 @@ export class UserService implements OnModuleInit {
     const newPassword = (
       await this.hashPassword(dataRequest.password)
     ).toString();
+    this.logger.log("dataRequest:", dataRequest);
     this.prismaSerivce.user
       .update({
         where: {
