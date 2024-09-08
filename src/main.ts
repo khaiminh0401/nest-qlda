@@ -1,9 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
+import { AppLog } from './app.log';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new AppLog(),
+  });
   app.enableCors({
     origin: [
       'http://localhost:4200',
